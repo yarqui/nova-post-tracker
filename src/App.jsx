@@ -1,9 +1,11 @@
 import { lazy, Suspense } from "react";
-import "./App.css";
+import axios from "axios";
 const ActionBlock = lazy(() => import("./components/ActionBlock/ActionBlock"));
 const History = lazy(() => import("./components/History/History"));
 
-function App() {
+axios.defaults.baseURL = import.meta.env.REACT_APP_API_BASE_URL; //eslint-disable-line
+
+const App = () => {
   return (
     <div className="container">
       <Suspense fallback="Loading...">
@@ -12,6 +14,6 @@ function App() {
       </Suspense>
     </div>
   );
-}
+};
 
 export default App;
