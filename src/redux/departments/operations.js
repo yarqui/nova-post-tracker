@@ -1,19 +1,21 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export const fetchDepartments = createAsyncThunk(
   "departments/fetchByCity",
   async (cityName, { rejectWithValue }) => {
     try {
-      const requestOptions = {
+      const requestBody = {
+        apiKey: API_KEY,
         modelName: "Address",
         calledMethod: "getWarehouses",
         methodProperties: {
           CityName: cityName,
         },
       };
-
-      const res = await axios.get("/", requestOptions);
+      const res = await axios.post("/", requestBody);
 
       return res.data;
     } catch (error) {
