@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TABS from "../../utils/tabs";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_TYPE from "../../utils/inputTypes";
 import INPUT_NAME from "../../utils/inputNames";
-import { fetchDepartments } from "../../redux/departments/operations";
 import DepartmentItem from "../DepartmentItem/DepartmentItem";
 import {
   selectDepartments,
@@ -13,17 +12,12 @@ import {
 } from "../../redux/departments/selectors";
 
 const ResultBlock = ({ tab }) => {
-  const dispatch = useDispatch();
   const departments = useSelector(selectDepartments);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   const showLoading = isLoading && !error;
   const showError = error && !isLoading;
-
-  // const fetchDepartmentsByCity = (city) => {
-  //   dispatch(fetchDepartments(city));
-  // };
 
   return (
     <div>
