@@ -1,25 +1,55 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import Button from "../Button/Button";
 import ResultBlock from "../ResultBlock/ResultBlock";
-import TrackingBar from "../TrackingBar/TrackingBar";
-import { useDispatch } from "react-redux";
-import { fetchDepartments } from "../../redux/departments/operations";
+import TABS from "../../utils/tabs";
+import BUTTON_TYPE from "../../utils/buttonTypes";
+import INPUT_TYPE from "../../utils/inputTypes";
+import SearchBar from "../SearchBar/SearchBar";
+import INPUT_NAME from "../../utils/inputNames";
 
 const ActionBlock = () => {
-  const dispatch = useDispatch();
+  const [currentTab, setCurrentTab] = useState(TABS.tracking);
 
-  // TODO: make state of input request with CityName to pass it to request in Button
-  const fetchDepartmentsByCity = async () => {
-    dispatch(fetchDepartments("Жмеринка"));
+  const handleTabClick = async (tab) => {
+    if (tab === TABS.departments) {
+      setCurrentTab(TABS.departments);
+
+      return;
+    }
+    setCurrentTab(TABS.tracking);
   };
+
   return (
     <div>
       <div>
-        <Button text="Перевірити ТТН" />
-        <Button text="Список відділень" handleClick={fetchDepartmentsByCity} />
+        <Button
+          buttonType={BUTTON_TYPE.button}
+          text="Перевірити ТТН"
+          handleClick={() => handleTabClick(TABS.tracking)}
+        />
+        <Button
+          buttonType={BUTTON_TYPE.button}
+          text="Список відділень"
+          handleClick={() => handleTabClick(TABS.departments)}
+        />
       </div>
-      <TrackingBar />
-      <ResultBlock />
+
+      {currentTab === TABS.tracking && (
+        <SearchBar
+          inputType={INPUT_TYPE.number}
+          inputName={INPUT_NAME.ttn}
+          inputTitle="Має містити 14 цифр"
+          minLength={14}
+          maxLength={14}
+          placeholder="Введіть номер ТТН"
+          buttonText="Перевірити статус ТТН"
+          handleClick={() => {
+            console.log("check the parcel status");
+          }}
+        />
+      )}
+
+      <ResultBlock tab={currentTab} />
     </div>
   );
 };

@@ -17,7 +17,7 @@ export const fetchDepartments = createAsyncThunk(
       };
       const res = await axios.post("/", requestBody);
 
-      return res.data;
+      return res.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
