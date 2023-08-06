@@ -1,20 +1,23 @@
 import { useSelector } from "react-redux";
 import { selectHistoryItems } from "../../redux/history/selectors";
+import { nanoid } from "nanoid";
+import { useMemo } from "react";
 
 const History = () => {
   const historyItems = useSelector(selectHistoryItems);
+  const memoizedHistoryItems = useMemo(() => historyItems, [historyItems]);
 
   return (
     <div>
       <h3>Історія</h3>
 
-      {historyItems.length === 0 && <p>Поки тут нічого немає</p>}
+      {memoizedHistoryItems.length === 0 && <p>Поки тут нічого немає</p>}
 
-      {historyItems.length > 0 && (
+      {memoizedHistoryItems.length > 0 && (
         <ul>
-          {historyItems.map((el) => (
-            <li key={el + Date.now()}>{el}</li>
-          ))}
+          {memoizedHistoryItems.map((el) => {
+            return <li key={nanoid()}>{el}</li>;
+          })}
         </ul>
       )}
     </div>

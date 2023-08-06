@@ -8,6 +8,7 @@ import { fetchCities } from "../../redux/departments/operations";
 import INPUT_NAME from "../../utils/inputNames";
 import { clearCities } from "../../redux/departments/departmentsSlice";
 import { addToHistory } from "../../redux/history/historySlice";
+import { fetchParcelInfo } from "../../redux/parcel/operations";
 
 const initialInputValue = "";
 
@@ -59,6 +60,7 @@ const SearchBar = ({
     }
 
     if (inputName === INPUT_NAME.ttn) {
+      dispatch(fetchParcelInfo(inputValue));
       dispatch(addToHistory(inputValue));
     }
   };

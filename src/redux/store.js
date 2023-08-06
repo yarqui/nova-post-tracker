@@ -11,12 +11,14 @@ import {
 } from "redux-persist";
 import { departmentsAndCitiesSlice } from "./departments/departmentsSlice";
 import { historySlice } from "./history/historySlice";
+import { parcelSlice } from "./parcel/parcelSlice";
 // import storage from "redux-persist/lib/storage";
 
 export const store = configureStore({
   reducer: {
     departments: departmentsAndCitiesSlice.reducer,
     history: historySlice.reducer,
+    parcel: parcelSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({

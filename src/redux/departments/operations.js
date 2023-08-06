@@ -7,7 +7,6 @@ export const fetchDepartments = createAsyncThunk(
   "depsAndCities/fetchDepsByCity",
   async (cityRef, { rejectWithValue }) => {
     if (cityRef === "") {
-      console.log("query is empty");
       return;
     }
 
