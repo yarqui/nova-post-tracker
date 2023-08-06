@@ -13,4 +13,6 @@ export const handlePending = (state) => {
 export const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  state.departments = [];
+  state.cities = [];
 };

@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { fetchDepartments } from "../../redux/departments/operations";
+import { debounce } from "lodash";
+import { fetchCities } from "../../redux/departments/operations";
+import INPUT_NAME from "../../utils/inputNames";
+import { clearCities } from "../../redux/departments/departmentsSlice";
+import { addToHistory } from "../../redux/history/historySlice";
 
 const initialInputValue = "";
 
@@ -14,21 +18,37 @@ const SearchBar = ({
   minLength,
   maxLength,
   placeholder,
-  // handleClick,
   inputName,
 }) => {
   const [inputValue, setInputValue] = useState(initialInputValue);
   const dispatch = useDispatch();
 
+  const debounceFetchCities = useMemo(
+    () =>
+      debounce((value) => {
+        dispatch(fetchCities(value));
+      }, 500),
+    [dispatch]
+  );
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
+
+    if (inputName === INPUT_NAME.city) {
+      debounceFetchCities(value);
+    }
   };
 
-  const handleSubmit = () => {
-    // handleClick(inputValue);
-    dispatch(fetchDepartments(inputValue));
-    setInputValue(initialInputValue);
+  const handleClick = () => {
+    if (inputName === INPUT_NAME.city) {
+      setInputValue(initialInputValue);
+      dispatch(clearCities());
+    }
+
+    if (inputName === INPUT_NAME.ttn) {
+      dispatch(addToHistory(inputValue));
+    }
   };
 
   return (
@@ -46,7 +66,7 @@ const SearchBar = ({
       <Button
         buttonType={BUTTON_TYPE.submit}
         text={buttonText}
-        handleClick={handleSubmit}
+        handleClick={handleClick}
       ></Button>
     </div>
   );
@@ -60,7 +80,6 @@ SearchBar.propTypes = {
   maxLength: PropTypes.number,
   placeholder: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
-  // handleClick: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

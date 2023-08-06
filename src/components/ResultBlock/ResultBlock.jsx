@@ -1,20 +1,24 @@
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TABS from "../../utils/tabs";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_TYPE from "../../utils/inputTypes";
 import INPUT_NAME from "../../utils/inputNames";
 import DepartmentItem from "../DepartmentItem/DepartmentItem";
 import {
+  selectCities,
   selectDepartments,
   selectError,
   selectIsLoading,
 } from "../../redux/departments/selectors";
+import { fetchDepartments } from "../../redux/departments/operations";
 
 const ResultBlock = ({ tab }) => {
   const departments = useSelector(selectDepartments);
+  const cities = useSelector(selectCities);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+  const dispatch = useDispatch();
 
   const showLoading = isLoading && !error;
   const showError = error && !isLoading;
@@ -37,8 +41,7 @@ const ResultBlock = ({ tab }) => {
             inputTitle='Назва населеного пункту, наприклад, "Київ"'
             minLength={3}
             placeholder="Назва населеного пункту"
-            buttonText="Знайти населений пункт"
-            // handleClick={fetchDepartmentsByCity}
+            buttonText="Очистити"
           />
           <div style={{ maxHeight: "300px", overflowY: "auto" }}>
             {showError && (
@@ -48,14 +51,28 @@ const ResultBlock = ({ tab }) => {
               </>
             )}
 
-            {showLoading ? (
-              <p>Завантаження...</p>
-            ) : (
+            {showLoading && <p>Завантаження...</p>}
+
+            {!showLoading && !showError && cities && (
               <ul>
-                {departments &&
-                  departments.map((dep) => (
-                    <DepartmentItem key={dep.Ref} dep={dep} />
-                  ))}
+                {cities.map((city) => (
+                  <li
+                    key={city.Ref}
+                    onClick={() => {
+                      dispatch(fetchDepartments(city.Ref));
+                    }}
+                  >
+                    {city.Present}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {!showLoading && !showError && departments && (
+              <ul>
+                {departments.map((dep) => (
+                  <DepartmentItem key={dep.Ref} dep={dep} />
+                ))}
               </ul>
             )}
           </div>

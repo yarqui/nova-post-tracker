@@ -9,11 +9,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { departmentsSlice } from "./departments/departmentsSlice";
+import { departmentsAndCitiesSlice } from "./departments/departmentsSlice";
+import { historySlice } from "./history/historySlice";
 // import storage from "redux-persist/lib/storage";
 
 export const store = configureStore({
-  reducer: { departments: departmentsSlice.reducer },
+  reducer: {
+    departments: departmentsAndCitiesSlice.reducer,
+    history: historySlice.reducer,
+  },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       serializableCheck: {

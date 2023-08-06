@@ -5,25 +5,42 @@ import {
   isPendingAction,
   isRejectedAction,
 } from "../common/common";
-import { fetchDepartments } from "./operations";
+import { fetchCities, fetchDepartments } from "./operations";
 
 const initialDepState = {
   isLoading: false,
   error: null,
-  items: [],
+  departments: [],
+  cities: [],
 };
 
-export const departmentsSlice = createSlice({
+// TODO: rename departments to deps&Cities (files, variables, etc)
+export const departmentsAndCitiesSlice = createSlice({
   name: "departments",
   initialState: initialDepState,
+  reducers: {
+    clearCities: (state) => {
+      state.cities = [];
+      state.departments = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDepartments.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.items = payload;
+        state.departments = payload;
+        state.cities = [];
+      })
+      .addCase(fetchCities.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.cities = payload;
+        state.departments = [];
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectedAction, handleRejected);
   },
 });
+
+export const { clearCities } = departmentsAndCitiesSlice.actions;

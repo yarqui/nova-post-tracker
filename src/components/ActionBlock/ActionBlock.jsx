@@ -43,9 +43,6 @@ const ActionBlock = () => {
           maxLength={14}
           placeholder="Введіть номер ТТН"
           buttonText="Перевірити статус ТТН"
-          handleClick={() => {
-            console.log("check the parcel status");
-          }}
         />
       )}
 
