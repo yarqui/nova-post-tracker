@@ -38,8 +38,8 @@ const ResultBlock = ({ tab }) => {
           <SearchBar
             inputType={INPUT_TYPE.text}
             inputName={INPUT_NAME.city}
-            inputTitle='Назва населеного пункту, наприклад, "Київ"'
-            minLength={3}
+            inputTitle="Мінімум 2 символи"
+            minLength={2}
             placeholder="Назва населеного пункту"
             buttonText="Очистити"
           />

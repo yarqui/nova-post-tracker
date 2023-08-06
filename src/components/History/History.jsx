@@ -7,11 +7,16 @@ const History = () => {
   return (
     <div>
       <h3>Історія</h3>
-      <ul>
-        {historyItems.map((el) => (
-          <li key={el + Date.now()}>{el}</li>
-        ))}
-      </ul>
+
+      {historyItems.length === 0 && <p>Поки тут нічого немає</p>}
+
+      {historyItems.length > 0 && (
+        <ul>
+          {historyItems.map((el) => (
+            <li key={el + Date.now()}>{el}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

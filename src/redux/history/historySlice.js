@@ -7,17 +7,9 @@ export const historySlice = createSlice({
   initialState: initialHistoryState,
   reducers: {
     addToHistory: (state, { payload }) => {
-      //   const alreadyInHistory = state.includes(+payload);
-
-      //   if (!alreadyInHistory) {
-      //     return [...state, +payload];
-      //   }
       const elQuantity = state.items?.length || 0;
       console.log("elQuantity:", elQuantity);
 
-      //   let updatedItems;
-
-      //   make function to remove the last element and then spread it in return
       let updatedItems = state.items;
 
       if (elQuantity > 9) {
@@ -26,7 +18,6 @@ export const historySlice = createSlice({
       }
 
       return { ...state, items: [...updatedItems, +payload] };
-      //   return { ...state, items: [...state.items, +payload] };
     },
     clearHistory: (state) => {
       state.items = [];
