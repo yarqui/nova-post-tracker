@@ -20,10 +20,9 @@ export const fetchParcelInfo = createAsyncThunk(
         },
       };
 
-      const { data } = axios.post("/", requestBody);
-      console.log("data:", data);
+      const { data } = await axios.post("/", requestBody);
 
-      return data;
+      return data.data[0];
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  handleFulfilled,
   handlePending,
   handleRejected,
+  isFulfilledAction,
   isPendingAction,
   isRejectedAction,
 } from "../common/common";
@@ -27,17 +29,15 @@ export const departmentsAndCitiesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDepartments.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
         state.departments = payload;
         state.cities = [];
       })
       .addCase(fetchCities.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.error = null;
         state.cities = payload;
         state.departments = [];
       })
+      .addMatcher(isFulfilledAction, handleFulfilled)
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectedAction, handleRejected);
   },

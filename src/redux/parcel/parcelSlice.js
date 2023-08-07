@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  handleFulfilled,
   handlePending,
   handleRejected,
+  isFulfilledAction,
   isPendingAction,
   isRejectedAction,
 } from "../common/common";
@@ -16,14 +18,20 @@ const initialParcelState = {
 export const parcelSlice = createSlice({
   name: "parcel",
   initialState: initialParcelState,
+  reducers: {
+    clearParcelInfo: (state) => {
+      state.info = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchParcelInfo.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
         state.info = payload;
       })
+      .addMatcher(isFulfilledAction, handleFulfilled)
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectedAction, handleRejected);
   },
 });
+
+export const { clearParcelInfo } = parcelSlice.actions;

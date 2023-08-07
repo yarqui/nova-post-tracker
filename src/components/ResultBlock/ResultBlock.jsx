@@ -12,25 +12,50 @@ import {
   selectIsLoading,
 } from "../../redux/departments/selectors";
 import { fetchDepartments } from "../../redux/departments/operations";
+import { selectParcel } from "../../redux/parcel/selectors";
 
 const ResultBlock = ({ tab }) => {
+  const dispatch = useDispatch();
+
   const departments = useSelector(selectDepartments);
   const cities = useSelector(selectCities);
+  const parcelInfo = useSelector(selectParcel);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const dispatch = useDispatch();
 
   const showLoading = isLoading && !error;
   const showError = error && !isLoading;
+  const showDepartments = !isLoading && !error && departments;
+  const showCities = !isLoading && !error && cities;
+  const showParcelInfo =
+    !isLoading && !error && Object.keys(parcelInfo).length !== 0;
 
   return (
     <div>
       {tab === TABS.tracking && (
-        <div>
-          <p>Статус доставки: {"статус"}</p>
-          <p>Відправлено: {"відправлено"}</p>
-          <p>Отримано: {"отримано"}</p>
-        </div>
+        <>
+          {showLoading && <p>Завантаження...</p>}
+
+          {showError && (
+            <>
+              <p>Виникла неочікувана помилка. Спробуйте ще раз.</p>
+              <p>{error.message}</p>
+            </>
+          )}
+
+          {showParcelInfo && (
+            <div>
+              <p>Статус доставки: {parcelInfo.Status}</p>
+              <hr />
+              <p>Відправлено: {parcelInfo.WarehouseSender}</p>
+              <hr />
+              <p>Отримано: {parcelInfo.WarehouseRecipient}</p>
+              <hr />
+              <p>Вартість: {parcelInfo.DocumentCost} грн.</p>
+              <hr />
+            </div>
+          )}
+        </>
       )}
 
       {tab === TABS.departments && (
@@ -53,7 +78,7 @@ const ResultBlock = ({ tab }) => {
 
             {showLoading && <p>Завантаження...</p>}
 
-            {!showLoading && !showError && cities && (
+            {showCities && cities && (
               <ul>
                 {cities.map((city) => (
                   <li
@@ -68,7 +93,7 @@ const ResultBlock = ({ tab }) => {
               </ul>
             )}
 
-            {!showLoading && !showError && departments && (
+            {showDepartments && (
               <ul>
                 {departments.map((dep) => (
                   <DepartmentItem key={dep.Ref} dep={dep} />

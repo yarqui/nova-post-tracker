@@ -35,6 +35,7 @@ const SearchBar = ({
   const handleInputChange = (e) => {
     const value = e.target.value;
 
+    // limits the length of input by 14 digits
     if (inputName === INPUT_NAME.ttn && value.length > 14) {
       const trimmedValue = value.slice(0, e.target.maxLength);
 

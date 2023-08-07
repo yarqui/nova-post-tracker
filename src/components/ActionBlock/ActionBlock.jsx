@@ -6,17 +6,21 @@ import BUTTON_TYPE from "../../utils/buttonTypes";
 import INPUT_TYPE from "../../utils/inputTypes";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_NAME from "../../utils/inputNames";
+import { useDispatch } from "react-redux";
+import { clearParcelInfo } from "../../redux/parcel/parcelSlice";
 
 const ActionBlock = () => {
   const [currentTab, setCurrentTab] = useState(TABS.tracking);
+  const dispatch = useDispatch();
 
   const handleTabClick = async (tab) => {
-    if (tab === TABS.departments) {
+    if (tab === TABS.departments && currentTab === TABS.tracking) {
       setCurrentTab(TABS.departments);
-
-      return;
+      dispatch(clearParcelInfo());
     }
-    setCurrentTab(TABS.tracking);
+
+    if (tab === TABS.tracking && currentTab === TABS.departments)
+      setCurrentTab(TABS.tracking);
   };
 
   return (
