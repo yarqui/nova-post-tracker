@@ -2,13 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
 import { fetchCities } from "../../redux/departments/operations";
 import INPUT_NAME from "../../utils/inputNames";
 import { clearCities } from "../../redux/departments/departmentsSlice";
 import { addToHistory } from "../../redux/history/historySlice";
 import { fetchParcelInfo } from "../../redux/parcel/operations";
+import { selectParcel } from "../../redux/parcel/selectors";
 
 const initialInputValue = "";
 
@@ -24,6 +25,10 @@ const SearchBar = ({
   const [inputValue, setInputValue] = useState(initialInputValue);
   const dispatch = useDispatch();
 
+  // TODO: delete Number if it is not needed in the future
+  const { Number } = useSelector(selectParcel);
+  console.log("Number:", Number);
+
   const debounceFetchCities = useMemo(
     () =>
       debounce((value) => {
@@ -38,7 +43,6 @@ const SearchBar = ({
     // limits the length of input by 14 digits
     if (inputName === INPUT_NAME.ttn && value.length > 14) {
       const trimmedValue = value.slice(0, e.target.maxLength);
-
       setInputValue(trimmedValue);
       return;
     }
@@ -61,6 +65,7 @@ const SearchBar = ({
     }
 
     if (inputName === INPUT_NAME.ttn) {
+      // TODO: if inputValue.length < 14 Notify user and don't fetch
       dispatch(fetchParcelInfo(inputValue));
       dispatch(addToHistory(inputValue));
     }

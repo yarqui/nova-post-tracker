@@ -12,6 +12,7 @@ import {
 import { departmentsAndCitiesSlice } from "./departments/departmentsSlice";
 import { historySlice } from "./history/historySlice";
 import { parcelSlice } from "./parcel/parcelSlice";
+import { tabsSlice } from "./tabs/tabsSlice";
 // import storage from "redux-persist/lib/storage";
 
 export const store = configureStore({
@@ -19,6 +20,7 @@ export const store = configureStore({
     departments: departmentsAndCitiesSlice.reducer,
     history: historySlice.reducer,
     parcel: parcelSlice.reducer,
+    tabs: tabsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
