@@ -16,6 +16,7 @@ const initialInputValue = "";
 const SearchBar = ({
   inputType,
   buttonText,
+  buttonType,
   inputTitle,
   minLength,
   maxLength,
@@ -27,7 +28,7 @@ const SearchBar = ({
   const { Number } = useSelector(selectParcel);
 
   useEffect(() => {
-    setInputValue(Number);
+    setInputValue(Number || "");
   }, [Number]);
 
   const debounceFetchCities = useMemo(
@@ -59,21 +60,34 @@ const SearchBar = ({
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
     if (inputName === INPUT_NAME.city) {
+      console.log("clear");
       setInputValue(initialInputValue);
       dispatch(clearCities());
     }
 
     if (inputName === INPUT_NAME.ttn) {
       // TODO: if inputValue.length < 14 Notify user and don't fetch
+      if (inputValue.length < 14) {
+        return;
+      }
       dispatch(fetchParcelInfo(inputValue));
       dispatch(addToHistory(inputValue));
     }
   };
 
   return (
-    <div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (inputName === INPUT_NAME.city) {
+          return;
+        }
+      }}
+    >
       <input
         type={inputType}
         name={inputName}
@@ -84,12 +98,13 @@ const SearchBar = ({
         placeholder={placeholder}
         onChange={handleInputChange}
       />
+
       <Button
-        buttonType={BUTTON_TYPE.submit}
+        buttonType={buttonType}
         text={buttonText}
         handleClick={handleClick}
-      ></Button>
-    </div>
+      />
+    </form>
   );
 };
 
@@ -101,6 +116,7 @@ SearchBar.propTypes = {
   maxLength: PropTypes.number,
   placeholder: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
+  buttonType: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

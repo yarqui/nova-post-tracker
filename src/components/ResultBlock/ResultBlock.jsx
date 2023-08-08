@@ -13,6 +13,7 @@ import {
 } from "../../redux/departments/selectors";
 import { fetchDepartments } from "../../redux/departments/operations";
 import { selectParcel } from "../../redux/parcel/selectors";
+import BUTTON_TYPE from "../../utils/buttonTypes";
 
 const ResultBlock = ({ tab }) => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const ResultBlock = ({ tab }) => {
             minLength={2}
             placeholder="Назва населеного пункту"
             buttonText="Очистити"
+            buttonType={BUTTON_TYPE.button}
           />
           <div style={{ maxHeight: "300px", overflowY: "auto" }}>
             {showError && (

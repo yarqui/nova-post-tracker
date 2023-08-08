@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import BUTTON_TYPE from "../../utils/buttonTypes";
 
-const Button = ({ text, handleClick, buttonType = BUTTON_TYPE.submit }) => {
+const Button = ({ text, handleClick, buttonType }) => {
   return (
     <button type={buttonType} onClick={handleClick}>
       {text}

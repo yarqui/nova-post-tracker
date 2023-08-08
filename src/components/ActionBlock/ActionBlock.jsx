@@ -52,6 +52,7 @@ const ActionBlock = () => {
           maxLength={14}
           placeholder="Введіть номер ТТН"
           buttonText="Перевірити статус ТТН"
+          buttonType={BUTTON_TYPE.submit}
         />
       )}
 
