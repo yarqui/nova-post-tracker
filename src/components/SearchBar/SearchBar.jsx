@@ -24,10 +24,11 @@ const SearchBar = ({
 }) => {
   const [inputValue, setInputValue] = useState(initialInputValue);
   const dispatch = useDispatch();
-
-  // TODO: delete Number if it is not needed in the future
   const { Number } = useSelector(selectParcel);
-  console.log("Number:", Number);
+
+  useEffect(() => {
+    setInputValue(Number);
+  }, [Number]);
 
   const debounceFetchCities = useMemo(
     () =>
