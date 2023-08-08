@@ -1,17 +1,20 @@
 import { lazy, Suspense } from "react";
-import "./App.css";
+import axios from "axios";
+import Loader from "./components/Loader/Loader";
 const ActionBlock = lazy(() => import("./components/ActionBlock/ActionBlock"));
 const History = lazy(() => import("./components/History/History"));
 
-function App() {
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+
+const App = () => {
   return (
     <div className="container">
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader />}>
         <ActionBlock />
         <History />
       </Suspense>
     </div>
   );
-}
+};
 
 export default App;
