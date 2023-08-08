@@ -30,28 +30,27 @@ const ResultBlock = ({ tab }) => {
   const showParcelInfo =
     !isLoading && !error && Object.keys(parcelInfo).length !== 0;
 
+  const { Status, WarehouseSender, WarehouseRecipient, DocumentCost } =
+    parcelInfo;
+
   return (
     <div>
       {tab === TABS.tracking && (
         <>
           {showLoading && <Loader />}
 
-          {showError && (
-            <>
-              <p>Виникла неочікувана помилка. Спробуйте ще раз.</p>
-              <p>{error.message}</p>
-            </>
-          )}
-
           {showParcelInfo && (
             <div>
-              <p>Статус доставки: {parcelInfo.Status}</p>
+              <p>Статус доставки: {Status || "немає даних"}</p>
               <hr />
-              <p>Відправлено: {parcelInfo.WarehouseSender}</p>
+              <p>Відправлено: {WarehouseSender || "немає даних"}</p>
               <hr />
-              <p>Отримано: {parcelInfo.WarehouseRecipient}</p>
+              <p>Отримано: {WarehouseRecipient || "немає даних"}</p>
               <hr />
-              <p>Вартість: {parcelInfo.DocumentCost} грн.</p>
+              <p>
+                Вартість: {DocumentCost || "немає даних"}
+                {DocumentCost && " грн"}
+              </p>
               <hr />
             </div>
           )}
@@ -72,7 +71,7 @@ const ResultBlock = ({ tab }) => {
           <div style={{ maxHeight: "300px", overflowY: "auto" }}>
             {showError && (
               <>
-                <p>Виникла неочікувана помилка. Спробуйте ще раз.</p>
+                <p>{error}</p>
                 <p>{error.message}</p>
               </>
             )}

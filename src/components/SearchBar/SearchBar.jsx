@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import BUTTON_TYPE from "../../utils/buttonTypes";
-import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import { fetchCities } from "../../redux/departments/operations";
 import INPUT_NAME from "../../utils/inputNames";
+import Button from "../Button/Button";
 import { clearCities } from "../../redux/departments/departmentsSlice";
 import { addToHistory } from "../../redux/history/historySlice";
 import { fetchParcelInfo } from "../../redux/parcel/operations";
@@ -69,8 +69,11 @@ const SearchBar = ({
     }
 
     if (inputName === INPUT_NAME.ttn) {
-      // TODO: if inputValue.length < 14 Notify user and don't fetch
       if (inputValue.length < 14) {
+        Notify.warning("Номер має містити 14 цифр", {
+          timeout: 1500,
+          fontSize: "14px",
+        });
         return;
       }
       dispatch(fetchParcelInfo(inputValue));
