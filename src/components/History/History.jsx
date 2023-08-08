@@ -7,9 +7,11 @@ import { changeTab } from "../../redux/tabs/tabsSlice";
 import TABS from "../../utils/tabs";
 import { PiEraserFill } from "react-icons/pi";
 import HistoryItem from "../HistoryItem/HistoryItem";
+import { clearHistory } from "../../redux/history/historySlice";
 
 const History = () => {
   const historyItems = useSelector(selectHistoryItems);
+  // TODO: do we need memoizedHistoryItems?
   const memoizedHistoryItems = useMemo(() => historyItems, [historyItems]);
 
   const dispatch = useDispatch();
@@ -23,7 +25,12 @@ const History = () => {
     <div>
       <div>
         <p>Історія</p>
-        <PiEraserFill />
+        <PiEraserFill
+          title="Очистити історію"
+          onClick={() => {
+            dispatch(clearHistory());
+          }}
+        />
       </div>
 
       {memoizedHistoryItems.length === 0 && <p>Поки тут нічого немає</p>}

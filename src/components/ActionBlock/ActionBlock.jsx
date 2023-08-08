@@ -12,14 +12,12 @@ import { changeTab } from "../../redux/tabs/tabsSlice";
 import { selectCurrentTab } from "../../redux/tabs/selectors";
 
 const ActionBlock = () => {
-  // const [currentTab, setCurrentTab] = useState(TABS.tracking);
   const currentTab = useSelector(selectCurrentTab);
   const dispatch = useDispatch();
 
   const handleTabClick = async (tab) => {
     if (tab === TABS.departments && currentTab === TABS.tracking) {
       dispatch(changeTab(TABS.departments));
-      // setCurrentTab(TABS.departments);
       dispatch(clearParcelInfo());
     }
 

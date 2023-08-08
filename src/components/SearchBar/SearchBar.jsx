@@ -64,7 +64,6 @@ const SearchBar = ({
     e.preventDefault();
 
     if (inputName === INPUT_NAME.city) {
-      console.log("clear");
       setInputValue(initialInputValue);
       dispatch(clearCities());
     }

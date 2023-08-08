@@ -11,14 +11,12 @@ import {
   selectError,
   selectIsLoading,
 } from "../../redux/departments/selectors";
-import { fetchDepartments } from "../../redux/departments/operations";
 import { selectParcel } from "../../redux/parcel/selectors";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import CityItem from "../CityItem/CityItem";
+import Loader from "../Loader/Loader";
 
 const ResultBlock = ({ tab }) => {
-  const dispatch = useDispatch();
-
   const departments = useSelector(selectDepartments);
   const cities = useSelector(selectCities);
   const parcelInfo = useSelector(selectParcel);
@@ -36,7 +34,7 @@ const ResultBlock = ({ tab }) => {
     <div>
       {tab === TABS.tracking && (
         <>
-          {showLoading && <p>Завантаження...</p>}
+          {showLoading && <Loader />}
 
           {showError && (
             <>
@@ -79,7 +77,7 @@ const ResultBlock = ({ tab }) => {
               </>
             )}
 
-            {showLoading && <p>Завантаження...</p>}
+            {showLoading && <Loader />}
 
             {showCities && cities && (
               <ul>
