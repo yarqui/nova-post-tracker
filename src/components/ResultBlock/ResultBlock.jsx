@@ -14,6 +14,7 @@ import {
 import { fetchDepartments } from "../../redux/departments/operations";
 import { selectParcel } from "../../redux/parcel/selectors";
 import BUTTON_TYPE from "../../utils/buttonTypes";
+import CityItem from "../CityItem/CityItem";
 
 const ResultBlock = ({ tab }) => {
   const dispatch = useDispatch();
@@ -83,14 +84,7 @@ const ResultBlock = ({ tab }) => {
             {showCities && cities && (
               <ul>
                 {cities.map((city) => (
-                  <li
-                    key={city.Ref}
-                    onClick={() => {
-                      dispatch(fetchDepartments(city.Ref));
-                    }}
-                  >
-                    {city.Present}
-                  </li>
+                  <CityItem key={city.Ref} city={city} />
                 ))}
               </ul>
             )}
