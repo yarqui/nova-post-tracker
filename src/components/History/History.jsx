@@ -11,9 +11,6 @@ import { clearHistory } from "../../redux/history/historySlice";
 
 const History = () => {
   const historyItems = useSelector(selectHistoryItems);
-  // TODO: do we need memoizedHistoryItems?
-  const memoizedHistoryItems = useMemo(() => historyItems, [historyItems]);
-
   const dispatch = useDispatch();
 
   const onHistoryItemClick = async (trackingNumber) => {
@@ -33,11 +30,11 @@ const History = () => {
         />
       </div>
 
-      {memoizedHistoryItems.length === 0 && <p>Поки тут нічого немає</p>}
+      {historyItems.length === 0 && <p>Поки тут нічого немає</p>}
 
-      {memoizedHistoryItems.length > 0 && (
+      {historyItems.length > 0 && (
         <ul>
-          {memoizedHistoryItems.map((el) => (
+          {historyItems.map((el) => (
             <HistoryItem
               key={nanoid()}
               el={el}

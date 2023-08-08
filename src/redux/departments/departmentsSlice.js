@@ -16,7 +16,6 @@ const initialDepState = {
   cities: [],
 };
 
-// TODO: rename departments to deps&Cities (files, variables, etc)
 export const departmentsAndCitiesSlice = createSlice({
   name: "departments",
   initialState: initialDepState,
