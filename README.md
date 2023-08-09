@@ -7,6 +7,7 @@ The project was created with Vite, using React template and deployed on Vercel.
 - Redux store for global state
 - Redux persist for persisting history items
 - Spinning Loader for loading process
+- adaptive layout for mobile, tablet and desktop
 - lazy component imports
 - env
 - styles with styled-components
