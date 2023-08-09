@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+
 import TABS from "../../utils/tabs";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_TYPE from "../../utils/inputTypes";
 import INPUT_NAME from "../../utils/inputNames";
+import BUTTON_TYPE from "../../utils/buttonTypes";
 import DepartmentItem from "../DepartmentItem/DepartmentItem";
+
 import {
   selectCities,
   selectDepartments,
@@ -12,9 +15,10 @@ import {
   selectIsLoading,
 } from "../../redux/departments/selectors";
 import { selectParcel } from "../../redux/parcel/selectors";
-import BUTTON_TYPE from "../../utils/buttonTypes";
+
 import CityItem from "../CityItem/CityItem";
 import Loader from "../Loader/Loader";
+
 import { ResultList, StatusLabel, StatusText } from "./ResultBlock.styled";
 
 const ResultBlock = ({ tab }) => {
@@ -46,17 +50,17 @@ const ResultBlock = ({ tab }) => {
                 Статус доставки:{" "}
                 <StatusText>{Status || "немає даних"}</StatusText>
               </StatusLabel>
-              {/* <hr /> */}
+
               <StatusLabel>
                 Відправлено:{" "}
                 <StatusText>{WarehouseSender || "немає даних"}</StatusText>
               </StatusLabel>
-              {/* <hr /> */}
+
               <StatusLabel>
                 Отримано:{" "}
                 <StatusText>{WarehouseRecipient || "немає даних"}</StatusText>
               </StatusLabel>
-              {/* <hr /> */}
+
               <StatusLabel>
                 Вартість:{" "}
                 <StatusText>
@@ -64,7 +68,6 @@ const ResultBlock = ({ tab }) => {
                   {DocumentCost && " грн"}
                 </StatusText>
               </StatusLabel>
-              {/* <hr /> */}
             </div>
           )}
         </>
