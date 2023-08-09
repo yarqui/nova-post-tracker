@@ -5,7 +5,7 @@ The project was created with Vite, using React template and deployed on Vercel.
 ## Features:
 
 - Nova Poshta API
-- Redux store for global state
+- Redux store for global state (Redux Toolkit)
 - Redux persist for persisting history items
 - Spinning Loader for loading process
 - adaptive layout for mobile, tablet and desktop
