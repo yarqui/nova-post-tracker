@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { PiBuildingsFill, PiMapPinFill, PiScalesFill } from "react-icons/pi";
+import { IconContext } from "react-icons";
 
 import { DepartmentItemStyled } from "./DepartmentItem.styled";
-import { IconContext } from "react-icons";
 
 const DepartmentItem = ({ dep }) => {
   return (

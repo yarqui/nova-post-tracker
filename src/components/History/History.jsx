@@ -1,20 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectHistoryItems } from "../../redux/history/selectors";
 import { nanoid } from "nanoid";
-import { useMemo } from "react";
+import { PiEraserFill } from "react-icons/pi";
+import { IconContext } from "react-icons";
+
 import { fetchParcelInfo } from "../../redux/parcel/operations";
 import { changeTab } from "../../redux/tabs/tabsSlice";
-import TABS from "../../utils/tabs";
-import { PiEraserFill } from "react-icons/pi";
-import HistoryItem from "../HistoryItem/HistoryItem";
 import { clearHistory } from "../../redux/history/historySlice";
+import TABS from "../../utils/tabs";
+import HistoryItem from "../HistoryItem/HistoryItem";
+
 import {
   HistoryHeadWrap,
   HistoryLabel,
   HistoryList,
   HistoryStyledWrap,
 } from "./History.styled";
-import { IconContext } from "react-icons";
 
 const History = () => {
   const historyItems = useSelector(selectHistoryItems);

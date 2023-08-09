@@ -13,7 +13,6 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   handleClick: PropTypes.func,
   buttonType: PropTypes.string.isRequired,
-  // active: PropTypes.bool,
 };
 
 export default Button;

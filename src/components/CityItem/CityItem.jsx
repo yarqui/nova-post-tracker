@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+
 import { fetchDepartments } from "../../redux/departments/operations";
+
 import { CityItemStyled } from "./CityItem.styled";
 
 const CityItem = ({ city }) => {

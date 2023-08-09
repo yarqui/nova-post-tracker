@@ -1,4 +1,3 @@
-// import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 import { HistoryItemStyled } from "./HistoryItem.styled";
 

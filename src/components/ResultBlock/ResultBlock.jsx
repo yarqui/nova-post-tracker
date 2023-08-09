@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TABS from "../../utils/tabs";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_TYPE from "../../utils/inputTypes";

@@ -9,11 +9,12 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 import { departmentsAndCitiesSlice } from "./departments/departmentsSlice";
 import { historySlice } from "./history/historySlice";
 import { parcelSlice } from "./parcel/parcelSlice";
 import { tabsSlice } from "./tabs/tabsSlice";
-import storage from "redux-persist/lib/storage";
 
 const historyPersistConfig = {
   key: "history",
