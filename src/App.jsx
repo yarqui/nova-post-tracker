@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import axios from "axios";
+
 import Loader from "./components/Loader/Loader";
 const ActionBlock = lazy(() => import("./components/ActionBlock/ActionBlock"));
 const History = lazy(() => import("./components/History/History"));

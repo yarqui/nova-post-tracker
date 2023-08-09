@@ -1,17 +1,20 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+
 import { fetchDepartments } from "../../redux/departments/operations";
+
+import { CityItemStyled } from "./CityItem.styled";
 
 const CityItem = ({ city }) => {
   const dispatch = useDispatch();
   return (
-    <li
+    <CityItemStyled
       onClick={() => {
         dispatch(fetchDepartments(city.Ref));
       }}
     >
       {city.Present}
-    </li>
+    </CityItemStyled>
   );
 };
 

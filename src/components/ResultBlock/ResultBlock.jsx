@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TABS from "../../utils/tabs";
 import SearchBar from "../SearchBar/SearchBar";
 import INPUT_TYPE from "../../utils/inputTypes";
@@ -15,6 +15,7 @@ import { selectParcel } from "../../redux/parcel/selectors";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import CityItem from "../CityItem/CityItem";
 import Loader from "../Loader/Loader";
+import { ResultList, StatusLabel, StatusText } from "./ResultBlock.styled";
 
 const ResultBlock = ({ tab }) => {
   const departments = useSelector(selectDepartments);
@@ -41,17 +42,29 @@ const ResultBlock = ({ tab }) => {
 
           {showParcelInfo && (
             <div>
-              <p>Статус доставки: {Status || "немає даних"}</p>
-              <hr />
-              <p>Відправлено: {WarehouseSender || "немає даних"}</p>
-              <hr />
-              <p>Отримано: {WarehouseRecipient || "немає даних"}</p>
-              <hr />
-              <p>
-                Вартість: {DocumentCost || "немає даних"}
-                {DocumentCost && " грн"}
-              </p>
-              <hr />
+              <StatusLabel>
+                Статус доставки:{" "}
+                <StatusText>{Status || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Відправлено:{" "}
+                <StatusText>{WarehouseSender || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Отримано:{" "}
+                <StatusText>{WarehouseRecipient || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Вартість:{" "}
+                <StatusText>
+                  {DocumentCost || "немає даних"}
+                  {DocumentCost && " грн"}
+                </StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
             </div>
           )}
         </>
@@ -79,19 +92,19 @@ const ResultBlock = ({ tab }) => {
             {showLoading && <Loader />}
 
             {showCities && cities && (
-              <ul>
+              <ResultList>
                 {cities.map((city) => (
                   <CityItem key={city.Ref} city={city} />
                 ))}
-              </ul>
+              </ResultList>
             )}
 
             {showDepartments && (
-              <ul>
+              <ResultList>
                 {departments.map((dep) => (
                   <DepartmentItem key={dep.Ref} dep={dep} />
                 ))}
-              </ul>
+              </ResultList>
             )}
           </div>
         </>

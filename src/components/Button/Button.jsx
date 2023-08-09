@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
+import { ButtonStyled } from "./Button.styled";
 
 const Button = ({ text, handleClick, buttonType }) => {
   return (
-    <button type={buttonType} onClick={handleClick}>
+    <ButtonStyled type={buttonType} onClick={handleClick}>
       {text}
-    </button>
+    </ButtonStyled>
   );
 };
 

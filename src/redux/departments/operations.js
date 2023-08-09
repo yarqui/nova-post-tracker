@@ -61,8 +61,6 @@ export const fetchCities = createAsyncThunk(
 
       isServerError(res);
 
-      console.log("res.data.errors:", res.data.errors);
-
       if (res.data.errors.includes("CityName has invalid characters")) {
         throw new Error("В назві населеного пункту невалідні символи");
       }
@@ -71,7 +69,6 @@ export const fetchCities = createAsyncThunk(
       if (!citiesCount) {
         throw new Error("Не знайдено населених пунктів з такою назвою");
       }
-      console.log("citiesCount:", citiesCount);
 
       const addresses = res.data.data[0].Addresses;
 

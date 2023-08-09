@@ -1,15 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
-import { fetchCities } from "../../redux/departments/operations";
+
 import INPUT_NAME from "../../utils/inputNames";
-import Button from "../Button/Button";
+import { fetchCities } from "../../redux/departments/operations";
 import { clearCities } from "../../redux/departments/departmentsSlice";
 import { addToHistory } from "../../redux/history/historySlice";
 import { fetchParcelInfo } from "../../redux/parcel/operations";
 import { selectParcel } from "../../redux/parcel/selectors";
+import Button from "../Button/Button";
+
+import { FormStyled, InputStyled } from "./SearchBar.styled";
 
 const initialInputValue = "";
 
@@ -26,6 +29,8 @@ const SearchBar = ({
   const [inputValue, setInputValue] = useState(initialInputValue);
   const dispatch = useDispatch();
   const { Number } = useSelector(selectParcel);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     setInputValue(Number || "");
@@ -79,10 +84,12 @@ const SearchBar = ({
       dispatch(fetchParcelInfo(inputValue));
       dispatch(addToHistory(inputValue));
     }
+
+    inputRef.current.blur();
   };
 
   return (
-    <form
+    <FormStyled
       onSubmit={(e) => {
         e.preventDefault();
         if (inputName === INPUT_NAME.city) {
@@ -90,7 +97,8 @@ const SearchBar = ({
         }
       }}
     >
-      <input
+      <InputStyled
+        ref={inputRef}
         type={inputType}
         name={inputName}
         title={inputTitle}
@@ -106,7 +114,7 @@ const SearchBar = ({
         text={buttonText}
         handleClick={handleClick}
       />
-    </form>
+    </FormStyled>
   );
 };
 
