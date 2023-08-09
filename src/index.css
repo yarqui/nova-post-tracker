@@ -8,6 +8,12 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+
+  --main-bg-color: #ededed;
+  --accent-color: #91f0ff;
+  --sec-accent-color: #919191;
+
+  --transition: 250ms ease-in-out;
 }
 
 body {
@@ -33,6 +39,7 @@ ul,
 ol {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 img {
@@ -42,12 +49,12 @@ img {
 }
 
 .container {
+  display: flex;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 16px;
   max-width: 100%;
-  border: 1px solid red;
+  gap: 12px;
 
   /* mobile screen */
   @media screen and (min-width: 375px) {
@@ -55,10 +62,15 @@ img {
   }
 
   /* tablet screen */
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    justify-content: center;
+  }
   @media screen and (min-width: 768px) {
     padding-right: 32px;
     padding-left: 32px;
     width: 768px;
+    justify-content: center;
   }
 
   /* desktop screen */
@@ -66,5 +78,23 @@ img {
     padding-right: 84px;
     padding-left: 84px;
     width: 1440px;
+  }
+}
+
+.icon-erase {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  transition: all var(--transition);
+  padding: 4px;
+
+  &:hover {
+    color: #ff4747;
+    cursor: pointer;
+    background-color: #e0e0e0;
+  }
+
+  &:active {
+    scale: 1.5;
   }
 }

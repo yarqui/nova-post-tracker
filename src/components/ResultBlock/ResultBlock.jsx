@@ -15,6 +15,8 @@ import { selectParcel } from "../../redux/parcel/selectors";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import CityItem from "../CityItem/CityItem";
 import Loader from "../Loader/Loader";
+import { CityList, StatusLabel, StatusText } from "./ResultBlock.styled";
+import { HistoryList } from "../History/History.styled";
 
 const ResultBlock = ({ tab }) => {
   const departments = useSelector(selectDepartments);
@@ -41,17 +43,29 @@ const ResultBlock = ({ tab }) => {
 
           {showParcelInfo && (
             <div>
-              <p>Статус доставки: {Status || "немає даних"}</p>
-              <hr />
-              <p>Відправлено: {WarehouseSender || "немає даних"}</p>
-              <hr />
-              <p>Отримано: {WarehouseRecipient || "немає даних"}</p>
-              <hr />
-              <p>
-                Вартість: {DocumentCost || "немає даних"}
-                {DocumentCost && " грн"}
-              </p>
-              <hr />
+              <StatusLabel>
+                Статус доставки:{" "}
+                <StatusText>{Status || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Відправлено:{" "}
+                <StatusText>{WarehouseSender || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Отримано:{" "}
+                <StatusText>{WarehouseRecipient || "немає даних"}</StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
+              <StatusLabel>
+                Вартість:{" "}
+                <StatusText>
+                  {DocumentCost || "немає даних"}
+                  {DocumentCost && " грн"}
+                </StatusText>
+              </StatusLabel>
+              {/* <hr /> */}
             </div>
           )}
         </>
@@ -79,11 +93,11 @@ const ResultBlock = ({ tab }) => {
             {showLoading && <Loader />}
 
             {showCities && cities && (
-              <ul>
+              <CityList>
                 {cities.map((city) => (
                   <CityItem key={city.Ref} city={city} />
                 ))}
-              </ul>
+              </CityList>
             )}
 
             {showDepartments && (

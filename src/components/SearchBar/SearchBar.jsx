@@ -10,6 +10,7 @@ import { clearCities } from "../../redux/departments/departmentsSlice";
 import { addToHistory } from "../../redux/history/historySlice";
 import { fetchParcelInfo } from "../../redux/parcel/operations";
 import { selectParcel } from "../../redux/parcel/selectors";
+import { FormStyled, InputStyled } from "./SearchBar.styled";
 
 const initialInputValue = "";
 
@@ -86,7 +87,7 @@ const SearchBar = ({
   };
 
   return (
-    <form
+    <FormStyled
       onSubmit={(e) => {
         e.preventDefault();
         if (inputName === INPUT_NAME.city) {
@@ -94,7 +95,7 @@ const SearchBar = ({
         }
       }}
     >
-      <input
+      <InputStyled
         ref={inputRef}
         type={inputType}
         name={inputName}
@@ -111,7 +112,7 @@ const SearchBar = ({
         text={buttonText}
         handleClick={handleClick}
       />
-    </form>
+    </FormStyled>
   );
 };
 

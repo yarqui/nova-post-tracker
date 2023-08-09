@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Button from "../Button/Button";
 import ResultBlock from "../ResultBlock/ResultBlock";
 import TABS from "../../utils/tabs";
@@ -10,9 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearParcelInfo } from "../../redux/parcel/parcelSlice";
 import { changeTab } from "../../redux/tabs/tabsSlice";
 import { selectCurrentTab } from "../../redux/tabs/selectors";
+import { ActionBlockWrap, TabWrap } from "./ActionBlock.styled";
 
 const ActionBlock = () => {
   const currentTab = useSelector(selectCurrentTab);
+  console.log("currentTab:", currentTab);
   const dispatch = useDispatch();
 
   const handleTabClick = async (tab) => {
@@ -27,19 +28,23 @@ const ActionBlock = () => {
   };
 
   return (
-    <div>
-      <div>
+    <ActionBlockWrap>
+      <TabWrap>
         <Button
           buttonType={BUTTON_TYPE.button}
           text="Перевірити ТТН"
           handleClick={() => handleTabClick(TABS.tracking)}
+          currentTab={currentTab}
+          // active={currentTab === TABS.tracking}
         />
         <Button
           buttonType={BUTTON_TYPE.button}
           text="Список відділень"
           handleClick={() => handleTabClick(TABS.departments)}
+          currentTab={currentTab}
+          // active={currentTab === TABS.departments}
         />
-      </div>
+      </TabWrap>
 
       {currentTab === TABS.tracking && (
         <SearchBar
@@ -55,7 +60,7 @@ const ActionBlock = () => {
       )}
 
       <ResultBlock tab={currentTab} />
-    </div>
+    </ActionBlockWrap>
   );
 };
 

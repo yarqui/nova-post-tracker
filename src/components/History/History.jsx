@@ -8,6 +8,13 @@ import TABS from "../../utils/tabs";
 import { PiEraserFill } from "react-icons/pi";
 import HistoryItem from "../HistoryItem/HistoryItem";
 import { clearHistory } from "../../redux/history/historySlice";
+import {
+  HistoryHeadWrap,
+  HistoryLabel,
+  HistoryList,
+  HistoryStyledWrap,
+} from "./History.styled";
+import { IconContext } from "react-icons";
 
 const History = () => {
   const historyItems = useSelector(selectHistoryItems);
@@ -19,21 +26,27 @@ const History = () => {
   };
 
   return (
-    <div>
-      <div>
-        <p>Історія</p>
-        <PiEraserFill
-          title="Очистити історію"
-          onClick={() => {
-            dispatch(clearHistory());
+    <HistoryStyledWrap>
+      <HistoryHeadWrap>
+        <HistoryLabel>Історія</HistoryLabel>
+        <IconContext.Provider
+          value={{
+            className: "icon-erase",
           }}
-        />
-      </div>
+        >
+          <PiEraserFill
+            title="Очистити історію"
+            onClick={() => {
+              dispatch(clearHistory());
+            }}
+          />
+        </IconContext.Provider>
+      </HistoryHeadWrap>
 
       {historyItems.length === 0 && <p>Поки тут нічого немає</p>}
 
       {historyItems.length > 0 && (
-        <ul>
+        <HistoryList>
           {historyItems.map((el) => (
             <HistoryItem
               key={nanoid()}
@@ -41,9 +54,9 @@ const History = () => {
               onItemCLick={onHistoryItemClick}
             />
           ))}
-        </ul>
+        </HistoryList>
       )}
-    </div>
+    </HistoryStyledWrap>
   );
 };
 

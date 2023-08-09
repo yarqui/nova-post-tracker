@@ -1,15 +1,16 @@
 // import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
+import { HistoryItemStyled } from "./HistoryItem.styled";
 
 const HistoryItem = ({ el, onItemCLick }) => {
   return (
-    <li
+    <HistoryItemStyled
       onClick={() => {
         onItemCLick(el);
       }}
     >
       {el}
-    </li>
+    </HistoryItemStyled>
   );
 };
 
