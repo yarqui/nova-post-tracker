@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
@@ -26,6 +26,8 @@ const SearchBar = ({
   const [inputValue, setInputValue] = useState(initialInputValue);
   const dispatch = useDispatch();
   const { Number } = useSelector(selectParcel);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     setInputValue(Number || "");
@@ -79,6 +81,8 @@ const SearchBar = ({
       dispatch(fetchParcelInfo(inputValue));
       dispatch(addToHistory(inputValue));
     }
+
+    inputRef.current.blur();
   };
 
   return (
@@ -91,6 +95,7 @@ const SearchBar = ({
       }}
     >
       <input
+        ref={inputRef}
         type={inputType}
         name={inputName}
         title={inputTitle}
