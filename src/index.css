@@ -98,3 +98,9 @@ img {
     scale: 1.5;
   }
 }
+
+.icon-department {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: bottom;
+}

@@ -15,8 +15,7 @@ import { selectParcel } from "../../redux/parcel/selectors";
 import BUTTON_TYPE from "../../utils/buttonTypes";
 import CityItem from "../CityItem/CityItem";
 import Loader from "../Loader/Loader";
-import { CityList, StatusLabel, StatusText } from "./ResultBlock.styled";
-import { HistoryList } from "../History/History.styled";
+import { ResultList, StatusLabel, StatusText } from "./ResultBlock.styled";
 
 const ResultBlock = ({ tab }) => {
   const departments = useSelector(selectDepartments);
@@ -93,19 +92,19 @@ const ResultBlock = ({ tab }) => {
             {showLoading && <Loader />}
 
             {showCities && cities && (
-              <CityList>
+              <ResultList>
                 {cities.map((city) => (
                   <CityItem key={city.Ref} city={city} />
                 ))}
-              </CityList>
+              </ResultList>
             )}
 
             {showDepartments && (
-              <ul>
+              <ResultList>
                 {departments.map((dep) => (
                   <DepartmentItem key={dep.Ref} dep={dep} />
                 ))}
-              </ul>
+              </ResultList>
             )}
           </div>
         </>

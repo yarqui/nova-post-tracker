@@ -11,7 +11,7 @@ export const StatusText = styled.span`
   color: var(--sec-accent-color);
 `;
 
-export const CityList = styled.ul`
+export const ResultList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
