@@ -1,3 +1,12 @@
+:root {
+  
+  --main-bg-color: #ededed;
+  --accent-color: #91f0ff;
+  --sec-accent-color: #919191;
+
+  --transition: 250ms ease-in-out;
+}
+
 html {
   box-sizing: border-box;
   width: 100vw;
@@ -8,12 +17,6 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-
-  --main-bg-color: #ededed;
-  --accent-color: #91f0ff;
-  --sec-accent-color: #919191;
-
-  --transition: 250ms ease-in-out;
 }
 
 body {
